@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
             filter['$text'] = { $search: search }
         }
 
-        const stocks = await Stock.find(filter).limit(perpage).skip(offset);
+        const stocks = await Stock.find(filter).sort({_id:-1}).limit(perpage).skip(offset);
         const total = await Stock.countDocuments(filter)
 
         res.status(200).json({
